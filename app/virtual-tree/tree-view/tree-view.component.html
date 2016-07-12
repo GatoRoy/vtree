@@ -1,0 +1,17 @@
+<div #treeVisibleView class="tree-visible-view" (scroll)="scrollToItem($event)">
+    <div class="tree-scrollable-view">
+        <div class="area-before-items" [style.height]="beforeAreaHeight + 'px'">&nbsp;</div>
+        <div *ngFor="let item of data.items" class="tree-rendered-item" [title]="item.id">
+            <tree-view-item 
+                [data]="item"
+                [fullHeight]="treeItemHeight"
+                [indentationSize]="treeItemIndentationSize"
+                (expandItem)="expandDataItem($event)"
+                (collapseItem)="collapseDataItem($event)"
+                (selectItem)="selectDataItem($event)"
+                >
+            </tree-view-item>
+        </div>
+        <div class="area-after-items" [style.height]="afterAreaHeight + 'px'">&nbsp;</div>
+    </div>
+</div>

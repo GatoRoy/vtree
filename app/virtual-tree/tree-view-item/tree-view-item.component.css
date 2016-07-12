@@ -1,0 +1,13 @@
+
+.tree-view-item {
+    border-bottom: 1px dashed #555;
+    cursor: default;
+}
+
+.tree-view-item-expander { cursor: pointer; }
+.tree-view-item-expanded { width: 16px; }
+.tree-view-item-collapsed { width: 16px; }
+
+.tree-view-item-checkbox input {
+    width: 12px;
+}

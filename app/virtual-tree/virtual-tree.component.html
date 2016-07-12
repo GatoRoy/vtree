@@ -1,0 +1,10 @@
+<tree-view #vTreeView 
+    [data]="dataToRender"
+    [treeItemHeight]="itemHeight"
+    [treeItemIndentationSize]="itemIndentationSize"
+    (onScroll)="scrollToItem($event)"
+    (onExpand)="expandTreeItem($event)"
+    (onCollapse)="collapseTreeItem($event)"
+    (onSelect)="selectTreeItem($event)"
+    >
+</tree-view>
