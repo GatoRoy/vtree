@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
-import { DataManager } from './data-manager/data-manager';
+import { TreeDataServiceActions } from './tree-data-service-actions';
+import { TreeDataManager } from './tree-data-manager/tree-data-manager';
 import { TreeItemData } from './tree-data/tree-item-data';
 import { RenderableTreeData } from './tree-data/renderable-tree-data';
 import { TreeViewComponent } from './tree-view/tree-view.component';
@@ -13,18 +14,15 @@ import { TreeViewComponent } from './tree-view/tree-view.component';
     providers: []
 })
 export class VirtualTreeComponent implements OnInit {
+    @Input() dataService: TreeDataServiceActions;
     @Input() itemHeight: number;
     @Input() itemIndentationSize: number;
 
     @ViewChild("vTreeView") vTreeView: TreeViewComponent;
 
-    private dataManager: DataManager;
+    private dataManager: TreeDataManager;
     private dataToRender: RenderableTreeData;
     
-    constructor() {
-        this.dataManager = new DataManager();
-    }
-
     get amountOfAllItems(): number {
         return this.dataManager.amountOfCachedItems;
     }
@@ -38,6 +36,7 @@ export class VirtualTreeComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.dataManager = new TreeDataManager(this.dataService);
         this.scrollToItem(0);
     }
 
@@ -61,7 +60,7 @@ export class VirtualTreeComponent implements OnInit {
     private selectTreeItem(dataItem: TreeItemData) {
         let isSuccess = this.dataManager.selectData(dataItem);
         
-        let itemString: string = `[ id=${dataItem.id}, name=${dataItem.name} ]`;
+        let itemString: string = `[ id=${dataItem.id}, name=${dataItem.caption} ]`;
         let message: string = isSuccess
             ? `${itemString} was ${dataItem.isSelected ? "selected" : "not selected"}`
             : "Failed to change the selection for item: " + itemString;

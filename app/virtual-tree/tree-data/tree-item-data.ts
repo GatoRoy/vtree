@@ -2,7 +2,7 @@
 export interface TreeItemData {
     index: number;
     id: string;
-    name: string; 
+    caption: string; 
     type: string;
     level: number;
     hasChildren: boolean;

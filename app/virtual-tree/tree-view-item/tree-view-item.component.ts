@@ -45,7 +45,7 @@ export class TreeViewItemComponent implements OnInit {
         this.allPaddingsString = this.generateAllPaddingsString();
 
         this.icon = `[${this.data.type}]`;
-        this.text = this.data.name;
+        this.text = this.data.caption;
     }
 
     private clickToExpand() {

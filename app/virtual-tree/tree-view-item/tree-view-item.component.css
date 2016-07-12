@@ -11,3 +11,7 @@
 .tree-view-item-checkbox input {
     width: 12px;
 }
+
+.tree-view-item-selected {
+    background-color: #fafad2;
+}

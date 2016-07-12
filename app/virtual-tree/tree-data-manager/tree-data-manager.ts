@@ -1,15 +1,21 @@
+import { TreeDataServiceActions } from '../tree-data-service-actions';
+import { TreeDataConverter } from '../tree-data-converter/tree-data-converter';
 import { TreeItemData } from '../tree-data/tree-item-data';
 import { RenderableTreeData } from '../tree-data/renderable-tree-data';
 
-export class DataManager {
+export class TreeDataManager {
+    private dataConverter: TreeDataConverter;
     private cachedItems: TreeItemData[];
     private scrollableItems: TreeItemData[];
 
-    constructor() {
+    constructor(private dataService: TreeDataServiceActions) {
+        this.dataConverter = new TreeDataConverter();
         
-        //load the items
+        let treeData = this.dataService.getTreeData();
+        let expandedItemIds = this.dataService.getExpandedItemIds();
+        let selectedItemIds = this.dataService.getSelectedItemIds();
 
-        this.cachedItems = this.generateItems();
+        this.cachedItems = this.dataConverter.convertTreeData(treeData, expandedItemIds, selectedItemIds);
 
         this.updateScrollableItems();
     }
@@ -48,56 +54,6 @@ export class DataManager {
         let dataItem: TreeItemData = this.scrollableItems[selectedItem.index];
         dataItem.isSelected = selectedItem.isSelected;
         return true;
-    }
-
-    private generateItems(): TreeItemData[] {
-        let items: TreeItemData[] = [];
-
-        for (let itemL0Index = 0; itemL0Index < 50; itemL0Index++) {
-            let dataItem: TreeItemData = {
-                index: -1,
-                id: "id" + itemL0Index,
-                type: "file",
-                name: "item " + itemL0Index,
-                level: 0,
-                hasChildren: true,
-                isExpanded: false,
-                isSelected: false
-            }
-            items.push(dataItem);
-
-            for (let itemL1Index = 0; itemL1Index < 10; itemL1Index++) {
-                let combinedIndices = itemL0Index + "_" + itemL1Index;
-                dataItem = {
-                    index: -1,
-                    id: "id" + combinedIndices,
-                    type: "file",
-                    name: "item " + combinedIndices,
-                    level: 1,
-                    hasChildren: true,
-                    isExpanded: false,
-                    isSelected: false
-                }
-                items.push(dataItem);
-
-                for (let itemL2Index = 0; itemL2Index < 10; itemL2Index++) {
-                    combinedIndices = itemL0Index + "_" + itemL1Index + "_" + itemL2Index;
-                    dataItem = {
-                        index: -1,
-                        id: "id" + combinedIndices,
-                        type: "file",
-                        name: "item " + combinedIndices,
-                        level: 2,
-                        hasChildren: false,
-                        isExpanded: false,
-                        isSelected: false
-                    }
-                    items.push(dataItem);
-                }
-            }
-        }
-
-        return items;
     }
 
     private updateScrollableItems() {

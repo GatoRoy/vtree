@@ -1,4 +1,4 @@
-<div class="tree-view-item" [style.height]="(fullHeight - 1) + 'px'" [style.padding]="allPaddingsString">
+<div class="tree-view-item {{data.isSelected ? 'tree-view-item-selected' : ''}}" [style.height]="(fullHeight - 1) + 'px'" [style.padding]="allPaddingsString">
     <span *ngIf="data.hasChildren" class="tree-view-item-expander">
         <span *ngIf="data.isExpanded" class="tree-view-item-expanded" (click)="clickToCollapse($event)">-&nbsp;</span>
         <span *ngIf="!data.isExpanded" class="tree-view-item-collapsed" (click)="clickToExpand($event)">+&nbsp;</span>

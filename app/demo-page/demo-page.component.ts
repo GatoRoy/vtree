@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 
 import { VirtualTreeComponent } from '../virtual-tree/virtual-tree.component';
+import { DemoTreeDataService } from '../demo-tree-data-service/demo-tree-data.service';
 
 @Component({
     selector: 'demo-page',
@@ -11,6 +12,12 @@ import { VirtualTreeComponent } from '../virtual-tree/virtual-tree.component';
 })
 export class DemoTreeViewPageComponent {
     @ViewChild("vtree") vtree: VirtualTreeComponent;
+
+    private demoTreeDataService: DemoTreeDataService;
+
+    constructor() {
+        this.demoTreeDataService = new DemoTreeDataService();
+    }
 }
 
 
