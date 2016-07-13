@@ -4,3 +4,4 @@ jspm_packages
 **/*npm-debug.log.*
 *.js
 *.js.map
+!systemjs.config.js
