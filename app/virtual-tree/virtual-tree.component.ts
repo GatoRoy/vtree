@@ -17,6 +17,7 @@ export class VirtualTreeComponent implements OnInit {
     @Input() dataService: TreeDataServiceActions;
     @Input() itemHeight: number;
     @Input() itemIndentationSize: number;
+    @Input() autoSelect: boolean;
 
     @ViewChild("vTreeView") vTreeView: TreeViewComponent;
 
@@ -36,7 +37,7 @@ export class VirtualTreeComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.dataManager = new TreeDataManager(this.dataService);
+        this.dataManager = new TreeDataManager(this.dataService, this.autoSelect);
         this.scrollToItem(0);
     }
 

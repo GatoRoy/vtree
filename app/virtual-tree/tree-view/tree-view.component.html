@@ -1,7 +1,7 @@
 <div #treeVisibleView class="tree-visible-view" (scroll)="scrollToItem($event)">
     <div class="tree-scrollable-view">
         <div class="area-before-items" [style.height]="beforeAreaHeight + 'px'">&nbsp;</div>
-        <div *ngFor="let item of data.items" class="tree-rendered-item" [title]="item.id">
+        <div *ngFor="let item of data.items" class="tree-rendered-item" [title]="item.caption">
             <tree-view-item 
                 [data]="item"
                 [fullHeight]="treeItemHeight"

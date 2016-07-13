@@ -4,6 +4,7 @@
 }
 
 .demo-page-tree {
+    display: inline-block;
     width: 600px;
     height: 180px;
     border: 1px solid #b0c4de;

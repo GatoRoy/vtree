@@ -2,12 +2,19 @@
     <div class="demo-page-headline">
         <h2>Example of tree view with {{vtree.amountOfSelectedItems}} selected items out of {{vtree.amountOfAllItems}} (only {{vtree.amountOfShownItems}} items are shown): </h2>
     </div>
-    <div class="demo-page-tree">
-        <vtree #vtree
-            [dataService]="demoTreeDataService"
-            [itemHeight]="30"
-            [itemIndentationSize]="20"
-            >
-        </vtree>
+    <div class="demo-page-tree-and-settings">
+        <span class="demo-page-tree">
+            <vtree #vtree
+                [dataService]="demoTreeDataService"
+                [itemHeight]="30"
+                [itemIndentationSize]="20"
+                [autoSelect]="isAutoSelect"
+                >
+            </vtree>
+        </span>
+        <span class="demo-page-settings">
+            <input type="checkbox" id="chkAutoSelect" checked="isAutoSelect ? 'checked' : ''" disabled="disabled" />
+            <label for="chkAutoSelect">Auto-select</label>
+        </span>
     </div>
 </div>

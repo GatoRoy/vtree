@@ -14,9 +14,11 @@ export class DemoTreeViewPageComponent {
     @ViewChild("vtree") vtree: VirtualTreeComponent;
 
     private demoTreeDataService: DemoTreeDataService;
+    private isAutoSelect: boolean;
 
     constructor() {
         this.demoTreeDataService = new DemoTreeDataService();
+        this.isAutoSelect = true;
     }
 }
 

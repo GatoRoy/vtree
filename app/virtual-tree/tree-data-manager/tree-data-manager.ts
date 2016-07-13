@@ -8,7 +8,7 @@ export class TreeDataManager {
     private cachedItems: TreeItemData[];
     private scrollableItems: TreeItemData[];
 
-    constructor(private dataService: TreeDataServiceActions) {
+    constructor(private dataService: TreeDataServiceActions, private isAutoSelect: boolean) {
         this.dataConverter = new TreeDataConverter();
         
         let treeData = this.dataService.getTreeData();
@@ -51,8 +51,16 @@ export class TreeDataManager {
     }
 
     selectData(selectedItem: TreeItemData): boolean {
-        let dataItem: TreeItemData = this.scrollableItems[selectedItem.index];
-        dataItem.isSelected = selectedItem.isSelected;
+        if (this.isAutoSelect) {
+            let itemIndex: number = this.cachedItems.indexOf(selectedItem);
+            itemIndex++;
+            let childItem: TreeItemData = this.cachedItems[itemIndex];
+            while (itemIndex < this.cachedItems.length && childItem.level > selectedItem.level) {
+                childItem.isSelected = selectedItem.isSelected;
+                itemIndex++;
+                childItem = this.cachedItems[itemIndex];
+            }
+        }
         return true;
     }
 
